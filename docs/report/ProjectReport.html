@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Kushagra Rai (23BCE11575)" />
+  <title>Student Grade Management System</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Student Grade Management System</h1>
+<p class="subtitle">Build Your Own Project — Project Report</p>
+<p class="author">Kushagra Rai (23BCE11575)</p>
+<p class="date">September 2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#student-grade-management-system">Student Grade Management
+System</a>
+<ul>
+<li><a href="#build-your-own-project-detailed-project-report">Build Your
+Own Project — Detailed Project Report</a></li>
+<li><a href="#cover-page">1. Cover Page</a></li>
+<li><a href="#introduction">2. Introduction</a></li>
+<li><a href="#problem-statement">3. Problem Statement</a></li>
+<li><a href="#functional-requirements">4. Functional
+Requirements</a></li>
+<li><a href="#non-functional-requirements">5. Non-Functional
+Requirements</a></li>
+<li><a href="#system-architecture">6. System Architecture</a></li>
+<li><a href="#design-diagrams">7. Design Diagrams</a>
+<ul>
+<li><a href="#use-case-diagram">7.1 Use Case Diagram</a></li>
+<li><a href="#class-diagram-summary">7.2 Class Diagram
+(Summary)</a></li>
+<li><a href="#sequence-diagram-record-grade">7.3 Sequence Diagram —
+Record Grade</a></li>
+<li><a href="#workflow-diagram">7.4 Workflow Diagram</a></li>
+<li><a href="#er-diagram">7.5 ER Diagram</a></li>
+</ul></li>
+<li><a href="#design-decisions-rationale">8. Design Decisions &amp;
+Rationale</a></li>
+<li><a href="#implementation-details">9. Implementation Details</a>
+<ul>
+<li><a href="#source-files-8-production-files-1-test-file">Source Files
+(8 production files + 1 test file)</a></li>
+<li><a href="#folder-package-structure">Folder / Package
+Structure</a></li>
+<li><a href="#sample-code-highlight-grade-auto-conversion">Sample Code
+Highlight — Grade Auto-Conversion</a></li>
+<li><a href="#sample-code-highlight-weighted-cgpa">Sample Code Highlight
+— Weighted CGPA</a></li>
+</ul></li>
+<li><a href="#screenshots-results">10. Screenshots / Results</a></li>
+<li><a href="#testing-approach">11. Testing Approach</a></li>
+<li><a href="#challenges-faced">12. Challenges Faced</a></li>
+<li><a href="#learnings-key-takeaways">13. Learnings &amp; Key
+Takeaways</a></li>
+<li><a href="#future-enhancements">14. Future Enhancements</a></li>
+<li><a href="#references">15. References</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="student-grade-management-system">Student Grade Management
+System</h1>
+<h2 id="build-your-own-project-detailed-project-report">Build Your Own
+Project — Detailed Project Report</h2>
+<p><strong>Name:</strong> Kushagra Rai <strong>Registration No:</strong>
+23BCE11575 <strong>Course:</strong> Object Oriented Programming (Java)
+<strong>Submission Date:</strong> September 2026</p>
+<hr />
+<h2 id="cover-page">1. Cover Page</h2>
+<p><strong>Project Title:</strong> Student Grade Management System
+<strong>Student Name:</strong> Kushagra Rai <strong>Registration
+Number:</strong> 23BCE11575 <strong>Programme:</strong> B.Tech Computer
+Science and Engineering <strong>Course:</strong> Object Oriented
+Programming <strong>Project Type:</strong> Build Your Own Project
+(VITyarthi)</p>
+<hr />
+<h2 id="introduction">2. Introduction</h2>
+<p>The <strong>Student Grade Management System (SGMS)</strong> is a
+console-based Java application designed to manage the academic records
+of students in a small educational setting. It demonstrates core
+Object-Oriented Programming concepts including encapsulation,
+modularity, and separation of concerns.</p>
+<p>The application allows administrators to maintain records of
+students, courses, and the grades achieved by students in each course.
+It automatically calculates letter grades and weighted CGPA, and
+produces formatted reports.</p>
+<p>The system uses simple CSV files for persistence, making it
+self-contained and easy to deploy without any external database or web
+server.</p>
+<hr />
+<h2 id="problem-statement">3. Problem Statement</h2>
+<p>Manual record keeping for student grades suffers from several
+drawbacks:</p>
+<ul>
+<li><strong>Inconsistency</strong> when multiple staff edit the same
+spreadsheet</li>
+<li><strong>Slow lookup</strong> of student transcripts</li>
+<li><strong>Error-prone</strong> manual CGPA calculation</li>
+<li><strong>No standardised reporting</strong> for course
+statistics</li>
+<li><strong>Difficult to audit</strong> changes</li>
+</ul>
+<p>SGMS addresses these problems by providing a single, consistent Java
+application that automates record-keeping, grade conversion, CGPA
+calculation, and report generation.</p>
+<hr />
+<h2 id="functional-requirements">4. Functional Requirements</h2>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 30%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Module</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FR1</td>
+<td>Student Management</td>
+<td>Add a new student with ID, name, email, program, and semester</td>
+</tr>
+<tr class="even">
+<td>FR2</td>
+<td>Student Management</td>
+<td>View all registered students</td>
+</tr>
+<tr class="odd">
+<td>FR3</td>
+<td>Student Management</td>
+<td>Update existing student details</td>
+</tr>
+<tr class="even">
+<td>FR4</td>
+<td>Student Management</td>
+<td>Delete a student from the system</td>
+</tr>
+<tr class="odd">
+<td>FR5</td>
+<td>Course Management</td>
+<td>Add a new course with code, title, credits, and instructor</td>
+</tr>
+<tr class="even">
+<td>FR6</td>
+<td>Course Management</td>
+<td>View all courses</td>
+</tr>
+<tr class="odd">
+<td>FR7</td>
+<td>Course Management</td>
+<td>Delete a course</td>
+</tr>
+<tr class="even">
+<td>FR8</td>
+<td>Grade Management</td>
+<td>Record marks for a student in a course</td>
+</tr>
+<tr class="odd">
+<td>FR9</td>
+<td>Grade Management</td>
+<td>Automatic letter grade and grade point assignment</td>
+</tr>
+<tr class="even">
+<td>FR10</td>
+<td>Grade Management</td>
+<td>Calculate weighted CGPA for any student</td>
+</tr>
+<tr class="odd">
+<td>FR11</td>
+<td>Reporting</td>
+<td>Generate formatted student transcript</td>
+</tr>
+<tr class="even">
+<td>FR12</td>
+<td>Reporting</td>
+<td>Generate course statistics (avg/max/min)</td>
+</tr>
+<tr class="odd">
+<td>FR13</td>
+<td>Reporting</td>
+<td>Generate system-wide summary</td>
+</tr>
+<tr class="even">
+<td>FR14</td>
+<td>Persistence</td>
+<td>Auto-save and auto-load data on startup/shutdown</td>
+</tr>
+</tbody>
+</table>
+<p>The system therefore satisfies the <strong>minimum three major
+functional modules</strong> requirement (Student, Course, Grade) plus a
+fourth Reporting module.</p>
+<hr />
+<h2 id="non-functional-requirements">5. Non-Functional Requirements</h2>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 38%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Requirement</th>
+<th>How It Is Met</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NFR1</td>
+<td><strong>Performance</strong></td>
+<td>In-memory <code>ArrayList</code> with O(n) lookup, sufficient for
+small datasets (&lt; 10,000 records). File I/O is asynchronous and only
+triggered on changes.</td>
+</tr>
+<tr class="even">
+<td>NFR2</td>
+<td><strong>Security / Validation</strong></td>
+<td>All inputs validated for type and range. Duplicate IDs are rejected.
+Marks must be 0–100.</td>
+</tr>
+<tr class="odd">
+<td>NFR3</td>
+<td><strong>Usability</strong></td>
+<td>Clear menu-driven interface, formatted tables, and descriptive error
+messages.</td>
+</tr>
+<tr class="even">
+<td>NFR4</td>
+<td><strong>Reliability</strong></td>
+<td>All file operations wrapped in try/catch. Malformed CSV lines are
+skipped with warnings rather than crashing the application.</td>
+</tr>
+<tr class="odd">
+<td>NFR5</td>
+<td><strong>Maintainability</strong></td>
+<td>Strict package separation: <code>model</code>, <code>manager</code>,
+<code>util</code>. Each class has a single responsibility.</td>
+</tr>
+<tr class="even">
+<td>NFR6</td>
+<td><strong>Error Handling</strong></td>
+<td>Illegal arguments, missing entities, and type mismatches all produce
+clear user-facing messages instead of stack traces.</td>
+</tr>
+<tr class="odd">
+<td>NFR7</td>
+<td><strong>Resource Efficiency</strong></td>
+<td>Single Scanner instance, files written only when data changes, no
+third-party dependencies.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="system-architecture">6. System Architecture</h2>
+<p>The application follows a <strong>three-layer
+architecture</strong>:</p>
+<ul>
+<li><strong>Presentation layer</strong> — <code>Main.java</code> (menu
+UI)</li>
+<li><strong>Business / Manager layer</strong> —
+<code>StudentManager</code>, <code>CourseManager</code>,
+<code>GradeManager</code></li>
+<li><strong>Model layer</strong> — <code>Student</code>,
+<code>Course</code>, <code>Grade</code> (POJOs)</li>
+<li><strong>Utility layer</strong> — <code>FileHandler</code>,
+<code>ReportGenerator</code></li>
+</ul>
+<pre><code>   ┌───────────────┐
+   │   Main.java   │  ← presentation
+   └──────┬────────┘
+          ▼
+   ┌───────────────┐
+   │   managers    │  ← business logic
+   └──────┬────────┘
+          ▼
+   ┌───────────────┐
+   │    models     │  ← data
+   └───────────────┘
+
+   FileHandler / ReportGenerator are utility classes used by all layers.</code></pre>
+<hr />
+<h2 id="design-diagrams">7. Design Diagrams</h2>
+<h3 id="use-case-diagram">7.1 Use Case Diagram</h3>
+<pre><code>Administrator ──► Add Student / Course
+              ──► Update / Delete Record
+              ──► Record Grade
+              ──► Generate Statistics
+
+Student       ──► View Transcript</code></pre>
+<h3 id="class-diagram-summary">7.2 Class Diagram (Summary)</h3>
+<pre><code>Student  ──1..*── Grade ──*..1── Course
+
+StudentManager    manages → Student
+CourseManager     manages → Course
+GradeManager      manages → Grade
+ReportGenerator   uses all three</code></pre>
+<h3 id="sequence-diagram-record-grade">7.3 Sequence Diagram — Record
+Grade</h3>
+<pre><code>User → Main → GradeManager → StudentManager → CourseManager → Grade → FileHandler
+ 1.      2.       3.            4.               5.            6.       7.
+&quot;select&quot; &quot;call&quot;  &quot;validate&quot;  &quot;find student&quot;  &quot;find course&quot;  &quot;save&quot;   &quot;persist&quot;</code></pre>
+<h3 id="workflow-diagram">7.4 Workflow Diagram</h3>
+<pre><code>Start → Display Menu → Read Choice → Dispatch Submenu
+   → Execute Action → Save to File → Print Output → Loop / Exit</code></pre>
+<h3 id="er-diagram">7.5 ER Diagram</h3>
+<pre><code>STUDENT (studentId PK, name, email, program, semester)
+GRADE   (studentId FK + courseCode FK, marks, letterGrade, gradePoint)
+COURSE  (courseCode PK, courseTitle, credits, instructor)</code></pre>
+<p>Full diagrams are available in
+<code>docs/diagrams/diagrams.md</code>.</p>
+<hr />
+<h2 id="design-decisions-rationale">8. Design Decisions &amp;
+Rationale</h2>
+<table>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Console UI</strong></td>
+<td>Matches the assignment brief; no GUI framework overhead; runs on any
+JDK install.</td>
+</tr>
+<tr class="even">
+<td><strong>CSV files</strong></td>
+<td>Keeps the project self-contained — no database install needed;
+portable across machines.</td>
+</tr>
+<tr class="odd">
+<td><strong>In-memory <code>ArrayList</code></strong></td>
+<td>Simplest collection that satisfies lookup-by-id. Easily upgraded to
+a <code>HashMap</code> if performance becomes an issue.</td>
+</tr>
+<tr class="even">
+<td><strong><code>manager</code> package separation</strong></td>
+<td>Encapsulates CRUD logic so that the <code>model</code> classes stay
+as pure data carriers (anemic-domain style, easy to test).</td>
+</tr>
+<tr class="odd">
+<td><strong>Auto letter grade conversion</strong></td>
+<td>Removes the chance of user-typo errors and guarantees the same grade
+scale across all students.</td>
+</tr>
+<tr class="even">
+<td><strong>Weighted CGPA</strong></td>
+<td>Reflects actual academic policy — a 4-credit course contributes more
+to CGPA than a 2-credit one.</td>
+</tr>
+<tr class="odd">
+<td><strong>Composite “course + student” key for grades</strong></td>
+<td>Avoids duplicate grades for the same combination and supports
+re-grading by overwriting.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-details">9. Implementation Details</h2>
+<h3 id="source-files-8-production-files-1-test-file">Source Files (8
+production files + 1 test file)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Purpose</th>
+<th>LOC*</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>model/Student.java</code></td>
+<td>Student entity</td>
+<td>~45</td>
+</tr>
+<tr class="even">
+<td><code>model/Course.java</code></td>
+<td>Course entity</td>
+<td>~45</td>
+</tr>
+<tr class="odd">
+<td><code>model/Grade.java</code></td>
+<td>Grade entity + auto conversion</td>
+<td>~70</td>
+</tr>
+<tr class="even">
+<td><code>manager/StudentManager.java</code></td>
+<td>Student CRUD</td>
+<td>~110</td>
+</tr>
+<tr class="odd">
+<td><code>manager/CourseManager.java</code></td>
+<td>Course CRUD</td>
+<td>~100</td>
+</tr>
+<tr class="even">
+<td><code>manager/GradeManager.java</code></td>
+<td>Grade ops + CGPA</td>
+<td>~115</td>
+</tr>
+<tr class="odd">
+<td><code>util/FileHandler.java</code></td>
+<td>CSV I/O</td>
+<td>~55</td>
+</tr>
+<tr class="even">
+<td><code>util/ReportGenerator.java</code></td>
+<td>Reports</td>
+<td>~110</td>
+</tr>
+<tr class="odd">
+<td><code>Main.java</code></td>
+<td>Menu UI + entry point</td>
+<td>~210</td>
+</tr>
+</tbody>
+</table>
+<p>*Approximate lines of code</p>
+<h3 id="folder-package-structure">Folder / Package Structure</h3>
+<pre><code>src/
+├── model/      (entities)
+├── manager/    (business logic)
+├── util/       (helpers)
+└── Main.java   (entry point)
+test/
+└── ValidationTest.java
+data/
+├── students.csv
+├── courses.csv
+└── grades.csv</code></pre>
+<h3 id="sample-code-highlight-grade-auto-conversion">Sample Code
+Highlight — Grade Auto-Conversion</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">void</span> <span class="fu">calculateGrade</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">90</span><span class="op">)</span>      <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;A+&quot;</span><span class="op">;</span> gradePoint <span class="op">=</span> <span class="fl">10.0</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">80</span><span class="op">)</span> <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;A&quot;</span><span class="op">;</span>  gradePoint <span class="op">=</span> <span class="fl">9.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">70</span><span class="op">)</span> <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;B+&quot;</span><span class="op">;</span> gradePoint <span class="op">=</span> <span class="fl">8.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">60</span><span class="op">)</span> <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;B&quot;</span><span class="op">;</span>  gradePoint <span class="op">=</span> <span class="fl">7.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">50</span><span class="op">)</span> <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;C&quot;</span><span class="op">;</span>  gradePoint <span class="op">=</span> <span class="fl">6.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>marks <span class="op">&gt;=</span> <span class="dv">40</span><span class="op">)</span> <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;D&quot;</span><span class="op">;</span>  gradePoint <span class="op">=</span> <span class="fl">5.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>                  <span class="op">{</span> letterGrade <span class="op">=</span> <span class="st">&quot;F&quot;</span><span class="op">;</span>  gradePoint <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span>  <span class="op">}</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="sample-code-highlight-weighted-cgpa">Sample Code Highlight —
+Weighted CGPA</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">double</span> <span class="fu">calculateCGPA</span><span class="op">(</span><span class="bu">String</span> studentId<span class="op">,</span> CourseManager cm<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">List</span><span class="op">&lt;</span>Grade<span class="op">&gt;</span> studentGrades <span class="op">=</span> <span class="fu">getGradesForStudent</span><span class="op">(</span>studentId<span class="op">);</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> totalWeightedPoints <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> totalCredits <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>Grade g <span class="op">:</span> studentGrades<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        Course c <span class="op">=</span> cm<span class="op">.</span><span class="fu">findByCode</span><span class="op">(</span>g<span class="op">.</span><span class="fu">getCourseCode</span><span class="op">());</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>c <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            totalWeightedPoints <span class="op">+=</span> g<span class="op">.</span><span class="fu">getGradePoint</span><span class="op">()</span> <span class="op">*</span> c<span class="op">.</span><span class="fu">getCredits</span><span class="op">();</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            totalCredits <span class="op">+=</span> c<span class="op">.</span><span class="fu">getCredits</span><span class="op">();</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> totalCredits <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> <span class="fl">0.0</span> <span class="op">:</span> totalWeightedPoints <span class="op">/</span> totalCredits<span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="screenshots-results">10. Screenshots / Results</h2>
+<p>Below is the expected console output when running the seeded
+data:</p>
+<pre><code>=========================================
+  STUDENT GRADE MANAGEMENT SYSTEM
+  Author: Kushagra Rai (23BCE11575)
+=========================================
+
+----- MAIN MENU -----
+1. Student Management
+2. Course Management
+3. Grade Management
+4. Reports &amp; Analytics
+0. Exit
+Enter choice: 4
+
+--- Reports &amp; Analytics ---
+1. Student Transcript
+2. Course Statistics
+3. System Summary
+Choice: 1
+Student ID: 23BCE11575
+
+========== ACADEMIC TRANSCRIPT ==========
+Student: Kushagra Rai
+ID:      23BCE11575
+Program: B.Tech CSE (Sem 3)
+-----------------------------------------
+Code       Course                         Marks    Grade
+-----------------------------------------
+CSE2001    Data Structures and Algorithms  92.50    A+
+CSE2003    Object Oriented Programming     85.00    A
+CSE2005    Database Management Systems     78.00    B+
+MAT2001    Probability and Statistics      88.00    A
+-----------------------------------------
+Total Credits: 14
+CGPA: 9.07 / 10.0
+=========================================</code></pre>
+<hr />
+<h2 id="testing-approach">11. Testing Approach</h2>
+<p>A self-contained <code>ValidationTest.java</code> class exercises the
+core logic:</p>
+<ul>
+<li>Student / Course entity creation</li>
+<li>Grade mapping at boundary values (40, 50, 60, 70, 80, 90)</li>
+<li>Rejection of out-of-range marks (&lt; 0 and &gt; 100)</li>
+<li>Weighted CGPA calculation against a hand-computed expected
+value</li>
+</ul>
+<p>The test class uses plain Java assertions and prints pass/fail
+counts. It does not depend on JUnit so it runs in any JDK.</p>
+<p><strong>Test command:</strong></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-cp</span> out test.ValidationTest</span></code></pre></div>
+<p><strong>Expected output:</strong></p>
+<pre><code>  [PASS] Student ID matches
+  [PASS] Student name matches
+  [PASS] Student semester matches
+  [PASS] Course code matches
+  [PASS] Course credits matches
+  [PASS] Grade A+ for 92.5 marks
+  [PASS] GradePoint 10.0 for 92.5 marks
+  [PASS] Grade B for 65 marks
+  [PASS] GradePoint 7.0 for 65 marks
+  [PASS] Grade F for 35 marks
+  [PASS] GradePoint 0.0 for 35 marks
+  [PASS] Correctly rejects marks &gt; 100
+  [PASS] Correctly rejects marks &lt; 0
+  [PASS] Weighted CGPA calculation
+
+========== TEST RESULTS ==========
+Passed: 14
+Failed: 0
+Total:  14
+==================================</code></pre>
+<hr />
+<h2 id="challenges-faced">12. Challenges Faced</h2>
+<ol type="1">
+<li><strong>No JDK in the sandbox</strong> — the project could not be
+compiled inside the development environment, so I had to rely on careful
+manual review of the code for syntax errors.</li>
+<li><strong>Weighted vs simple average</strong> — early designs used a
+simple average of grade points. The academic-correct version weights by
+credits, which required looking up course credits during CGPA
+calculation.</li>
+<li><strong>Composite key for grades</strong> — there is no built-in ID
+for a Grade, so I used <code>(studentId, courseCode)</code> as a
+composite key and removed any existing entry before re-recording.</li>
+</ol>
+<hr />
+<h2 id="learnings-key-takeaways">13. Learnings &amp; Key Takeaways</h2>
+<ul>
+<li><strong>Separation of concerns</strong> is critical: keeping
+<code>model</code>, <code>manager</code>, and <code>util</code> in
+distinct packages made the code far easier to read and extend.</li>
+<li><strong>Encapsulation pays off</strong> — putting letter-grade
+calculation inside the <code>Grade</code> class prevents other classes
+from accidentally assigning an inconsistent letter and number.</li>
+<li><strong>Persistence thinking</strong> — designing the CSV format up
+front made the file I/O layer straightforward.</li>
+<li><strong>Even simple projects need validation</strong> — adding
+bounds checking to marks (0–100) caught several potential bugs in the
+test suite.</li>
+<li><strong>Documentation as design</strong> — writing the use case
+diagram first clarified exactly which methods the menu needed to
+expose.</li>
+</ul>
+<hr />
+<h2 id="future-enhancements">14. Future Enhancements</h2>
+<ul>
+<li><strong>Database migration</strong> — replace CSV with SQLite via
+JDBC for better concurrency.</li>
+<li><strong>Web UI</strong> — wrap the manager layer with a Spring Boot
+REST API.</li>
+<li><strong>Authentication</strong> — add login for admin vs student
+roles.</li>
+<li><strong>Export</strong> — produce PDF transcripts using a library
+like iText.</li>
+<li><strong>More analytics</strong> — grade distribution histograms,
+toppers list, semester-wise trends.</li>
+<li><strong>Unit test framework</strong> — migrate the validation tests
+to JUnit 5 for richer reporting.</li>
+</ul>
+<hr />
+<h2 id="references">15. References</h2>
+<ul>
+<li>Oracle, <em>The Java Tutorials — Object-Oriented Programming
+Concepts</em>.
+https://docs.oracle.com/javase/tutorial/java/concepts/</li>
+<li>Oracle, <em>Java Platform, Standard Edition Documentation</em>.
+https://docs.oracle.com/en/java/javase/</li>
+<li>Bloch, J. <em>Effective Java</em>, 3rd Edition. Addison-Wesley,
+2018.</li>
+<li>Refactoring Guru, <em>GRASP Design Patterns</em>.
+https://refactoring.guru/design-patterns</li>
+<li>VITyarthi, <em>Build Your Own Project — General Instructions</em>,
+2026.</li>
+</ul>
+<hr />
+<p><em>End of Report</em></p>
+</body>
+</html>
